@@ -2,19 +2,35 @@ on:
   push:
     branches:
       - main
-name: 🚀 Deploy website on push
+name: Deploy website on push
 jobs:
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: 🚚 Get latest code
-        uses: actions/checkout@v2
+      - name: Get latest code
+        uses: actions/checkout@v3
+      - name: Set up Java version
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'zulu'
+          java-version: '17'
+      - name: Build with Maven
+        run: mvn clean install
 
-      - name: 📂 Sync files
+#
+#      - name: Upload artifact for deployment job
+#        uses: actions/upload-artifact@v3
+#        with:
+#          name: java-app
+#          path: ./target
+
+
+      - name: Sync files
         uses: SamKirkland/FTP-Deploy-Action@4.0.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
           server-dir: /var/www/http/
+
