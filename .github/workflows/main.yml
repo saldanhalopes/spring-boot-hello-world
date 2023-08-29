@@ -5,7 +5,7 @@ on:
 name: Deploy website on push
 jobs:
   web-deploy:
-    name: 🎉 Deploy
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Get latest code
@@ -32,6 +32,5 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
-          local-dir: /target/
           server-dir: /var/www/http/
 
