@@ -32,5 +32,6 @@ jobs:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USER }}
           password: ${{ secrets.FTP_PASS }}
+          local-dir: /target/spring-boot-2-hello-world-1.0.2-SNAPSHOT.jar
           server-dir: /var/www/http/
 
